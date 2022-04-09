@@ -6,9 +6,9 @@ import {
   useVote,
   useNetwork,
 } from '@thirdweb-dev/react';
+import { ChainId } from '@thirdweb-dev/sdk';
 import { useState, useEffect, useMemo } from 'react';
 import { AddressZero } from '@ethersproject/constants';
-import { ChainId } from '@thirdweb-dev/sdk';
 
 const App = () => {
   // Use the hooks thirdweb give us.
@@ -23,12 +23,13 @@ const App = () => {
   );
   // Initialize our token contract
   const token = useToken('0x82e9fd9b2eac7eCE086f6Df3AC7661b9E742F064');
+  // Initialize our vote contract
   const vote = useVote('0x8fE5B29583aEBAe2E59a63209b37c8650FD6A46c');
+
   // State variable for us to know if user has our NFT.
   const [hasClaimedNFT, setHasClaimedNFT] = useState(false);
   // isClaiming lets us easily keep a loading state while the NFT is minting.
   const [isClaiming, setIsClaiming] = useState(false);
-  // Holds the amount of token each member has in state.
 
   // Holds the amount of token each member has in state.
   const [memberTokenAmounts, setMemberTokenAmounts] = useState([]);
@@ -76,7 +77,7 @@ const App = () => {
 
     const checkIfUserHasVoted = async () => {
       try {
-        const hasVoted = await vote.hasVoted(proposals[0].proposalId, address);
+        const hasVoted = await vote.hasVoted(proposals[0].proposalId);
         setHasVoted(hasVoted);
         if (hasVoted) {
           console.log('🥵 User has already voted');
@@ -186,6 +187,19 @@ const App = () => {
     }
   };
 
+  // This is the case where the user hasn't connected their wallet
+  // to your web app. Let them call connectWallet.
+  if (!address) {
+    return (
+      <div className="landing">
+        <h1>Crypt-o-Care DAO</h1>
+        <button onClick={connectWithMetamask} className="btn-hero">
+          Connect your wallet
+        </button>
+      </div>
+    );
+  }
+
   if (network?.[0].data.chain.id !== ChainId.Rinkeby) {
     return (
       <div className="unsupported-network">
@@ -198,24 +212,12 @@ const App = () => {
     );
   }
 
-  // This is the case where the user hasn't connected their wallet
-  // to your web app. Let them call connectWallet.
-  if (!address) {
-    return (
-      <div className="landing">
-        <h1>Welcome to Crypt-o-Care DAO</h1>
-        <button onClick={connectWithMetamask} className="btn-hero">
-          Connect your wallet
-        </button>
-      </div>
-    );
-  }
   // If the user has already claimed their NFT we want to display the interal DAO page to them
   // only DAO members will see this. Render all the members + token amounts.
   if (hasClaimedNFT) {
     return (
       <div className="member-page">
-        <h1>Crypt-o-Care DAO Member Page</h1>
+        <h1>Crypt-o-Care Member Page</h1>
         <p>Congratulations on being a member</p>
         <div>
           <div>
@@ -370,7 +372,7 @@ const App = () => {
   // Render mint nft screen.
   return (
     <div className="mint-nft">
-      <h1>Mint your free 🍪DAO Membership NFT</h1>
+      <h1>Mint your free Crypt-o-Care Membership NFT</h1>
       <button disabled={isClaiming} onClick={mintNft}>
         {isClaiming ? 'Minting...' : 'Mint your nft (FREE)'}
       </button>
