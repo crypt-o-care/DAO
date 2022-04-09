@@ -191,12 +191,50 @@ const App = () => {
   // to your web app. Let them call connectWallet.
   if (!address) {
     return (
-      <div className="landing">
-        <h1>Crypt-o-Care DAO</h1>
-        <button onClick={connectWithMetamask} className="btn-hero">
-          Connect your wallet
-        </button>
+
+      <main>
+      <div
+        style={{'backgroundImage': 'url(img/blockchain.jpg)', 'backgroundSize': '100% auto', 'backgroundRepeat': 'no-repeat'}}
+        class="text-center"
+      >
+        <img
+          src="img/blockchain.jpg"
+          class="img-fluid mx-auto d-block"
+          alt="..."
+        />
+        <div class="pt-5 pb-5" style={{'backgroundColor': '#CDE6F5'}}>
+          <p class="h1 pt-5 pb-5" style={{'fontWeight': '400'}} >Health insurance powered by blockchain</p>
+          <button type="button" onClick={connectWithMetamask}  class="btn btn-primary btn-lg" style={{'boxShadow': '2px 2px black', 'backgroundColor': '#0170C0', 'borderRadius': '0'}}>
+            Connect to wallet
+          </button>
+        </div>
       </div>
+      <div class="container marketing pt-5">
+        <div class="row pt-5">
+          <div class="col-lg-4 text-center">
+            <img src="/images/ethereum.png" alt="..."  width="140" height="130"/>
+            <p class="lead pt-3" style={{'fontSize': '30'}}>Purchase healthcare with Ethereum</p>
+            <p class="lead">
+                We offer a variety of healthcare coverage options to suit your lifestyle
+            </p>
+          </div>
+          <div class="col-lg-4 text-center">
+              <img src="/images/Network.png" alt="..."  width="140" height="130"/>
+            <p class="lead pt-3" style={{'fontSize': '30'}}>Simple, automated co-pays</p>
+            <p class="lead">
+                Any Co-pays will be deducted automatically from your MetaMask wallet
+            </p>
+          </div>
+          <div class="col-lg-4 text-center">
+            <img src="/images/Cross.png" alt="..."  width="140" height="130"/>
+            <p class="lead pt-3" style={{'fontSize': '30'}}>Your choice of provider</p>
+            <p class="lead">
+                In-Network providers are paid from the Crypt-O-Care network automatically after your visit
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
     );
   }
 
@@ -217,11 +255,11 @@ const App = () => {
   if (hasClaimedNFT) {
     return (
       <div className="member-page">
-        <h1>Crypt-o-Care Member Page</h1>
+        <h2>Crypt-o-Care Member Page</h2>
         <p>Congratulations on being a member</p>
         <div>
           <div>
-            <h2>Member List</h2>
+            <h3>Member List</h3>
             <table className="card">
               <thead>
                 <tr>
@@ -242,7 +280,7 @@ const App = () => {
             </table>
           </div>
           <div>
-            <h2>Active Proposals</h2>
+            <h3>Active Proposals</h3>
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
@@ -371,12 +409,53 @@ const App = () => {
 
   // Render mint nft screen.
   return (
-    <div className="mint-nft">
-      <h1>Mint your free Crypt-o-Care Membership NFT</h1>
-      <button disabled={isClaiming} onClick={mintNft}>
+
+
+    <main>
+    <div
+      style={{'backgroundImage': 'url(img/blockchain.jpg)', 'backgroundSize': '100% auto', 'backgroundRepeat': 'no-repeat'}}
+      class="text-center"
+    >
+      <img
+        src="img/blockchain.jpg"
+        class="img-fluid mx-auto d-block"
+        alt="..."
+      />
+      <div class="pt-5 pb-5" style={{'backgroundColor': '#CDE6F5'}}>
+        <p class="h1 pt-5 pb-5" style={{'fontWeight': '400'}} >Mint your free Crypt-o-Care Membership NFT</p>
+        <button type="button" className="btn btn-primary btn-lg" style={{'boxShadow': '2px 2px black', 'backgroundColor': '#0170C0', 'borderRadius': '0'}}
+        disabled={isClaiming} onClick={mintNft}>
         {isClaiming ? 'Minting...' : 'Mint your nft (FREE)'}
-      </button>
+        </button>
+      </div>
     </div>
+    <div class="container marketing pt-5">
+      <div class="row pt-5">
+        <div class="col-lg-4 text-center">
+          <img src="/images/ethereum.png" alt="..."  width="140" height="130"/>
+          <p class="lead pt-3" style={{'fontSize': '30'}}>Purchase healthcare with Ethereum</p>
+          <p class="lead">
+              We offer a variety of healthcare coverage options to suit your lifestyle
+          </p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <img src="/images/Network.png" alt="..."  width="140" height="130"/>
+          <p class="lead pt-3" style={{'fontSize': '30'}}>Simple, automated co-pays</p>
+          <p class="lead">
+              Any Co-pays will be deducted automatically from your MetaMask wallet
+          </p>
+        </div>
+        <div class="col-lg-4 text-center">
+          <img src="/images/Cross.png" alt="..."  width="140" height="130"/>
+          <p class="lead pt-3" style={{'fontSize': '30'}}>Your choice of provider</p>
+          <p class="lead">
+              In-Network providers are paid from the Crypt-O-Care network automatically after your visit
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
   );
 };
 
